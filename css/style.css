@@ -12,7 +12,7 @@ body {
 
 .quote{
 	-webkit-border-radius: 6px;
-	border-radius: 6px; 
+	border-radius: 6px;
 	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 	-webkit-box-shadow: 0px 0px 6px 0px #000;
 	box-shadow: 0px 0px 6px 0px #000;
@@ -56,4 +56,15 @@ body {
 .quote-content {
 	text-align: justify;
 	padding: 7px;
+}
+
+#next {
+	display: block;
+	margin: 0 auto;
+}
+
+.buttonarea {
+	position: absolute;
+	bottom: 10%;
+	width: 100%;
 }

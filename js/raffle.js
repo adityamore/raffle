@@ -90,7 +90,7 @@ function Ticket(name, points){
 			'position':'absolute',
 			'top': me.dom.offset().top,
 			'left':me.dom.offset().left,
-			'background': colors.length > me.points ? colors[me.points] : "rgb(" + Math.floor(Math.random()*256) + "," + Math.floor(Math.random()*256) + "," + Math.floor(Math.random()*256) + ")" 
+			'background': colors.length > me.points ? colors[me.points] : "rgb(" + Math.floor(Math.random()*256) + "," + Math.floor(Math.random()*256) + "," + Math.floor(Math.random()*256) + ")"
 		});
 	};
 	this.decrement = function(length, callback){
@@ -176,7 +176,7 @@ var pickName = function(){
 	inProgress = true;
 	$('.ticket').unbind('click');
 	$('body').unbind('click');
-	
+
 	var choices = getChoices();
 	if(choices.length > 1){
 		var remove = Math.floor(Math.random()*choices.length);
@@ -190,7 +190,26 @@ var pickName = function(){
 		var left = choices.css('left');
 		var fontsize = choices.css('font-size');
 		var width = choices.width();
+		$('body').append('<div class="buttonarea"><input type="button" id="next" value="Remove and Proceed"/></div>');
+		$('#next').click(function() {
+			$('#next').remove();
+			var newImported = [];
+			var currentSelected = choices[0].innerHTML;
+			for(i=0; i < imported.length;i++) {
+				if (imported[i].name != currentSelected) {
+					newImported.push(imported[i]);
+				}
+			}
+			imported = newImported;
+			inProgress = false;
+			choices.animate({'height': 0, 'width': 0},'slow');
+			$('.ticket').show(500).unbind('click');
+			setTimeout(function(){
+				makeTicketsWithPoints(ticketNames, ticketPoints);
+			}, 700);
+		});
 		choices.click(function(){
+			$('#next').remove();
 			inProgress = false;
 			choices.animate({'font-size':fontsize,'top':top,'left':left},'slow');
 			$('.ticket').show(500).unbind('click');
